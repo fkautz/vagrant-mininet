@@ -1,0 +1,14 @@
+---
+- hosts: all
+  sudo: true
+  tasks: 
+  - name: Update apt
+    apt: update_cache=yes
+  - name: Install git
+    apt: name=git
+  - name: Checkout mininet
+    git: repo=git://github.com/mininet/mininet dest=/src/mininet
+  - name: Compile mininet
+    command: ./util/install.sh -a
+    args:
+      chdir: /src/mininet
